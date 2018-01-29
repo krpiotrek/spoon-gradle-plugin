@@ -99,8 +99,8 @@ class SpoonPlugin implements Plugin<Project> {
       task.configure {
         group = JavaBasePlugin.VERIFICATION_GROUP
 
-        applicationApk = testVariant.outputs[0].outputFile
-        instrumentationApk = applicationApk
+        def instrumentationPackage = testVariant.outputs[0].outputFile
+        instrumentationApk = instrumentationPackage
 
         File outputBase = config.baseOutputDir
         if (!outputBase) {
@@ -146,9 +146,21 @@ class SpoonPlugin implements Plugin<Project> {
 
         dependsOn testVariant.testedVariant.assemble, testVariant.assemble
       }
+
+      task.doFirst {
+        def testedOutput = testVariant.testedVariant.outputs[0]
+
+        if (testedOutput instanceof ApkVariantOutput) {
+          task.applicationApk = testedOutput.outputFile
+        } else {
+          // This is a hack for library projects.
+          // We supply the same apk as an application and instrumentation to the soon runner.
+          task.applicationApk = task.instrumentationApk
+        }
+      }
+
       task.outputs.upToDateWhen { false }
       return task
     } as List<SpoonRunTask>
   }
-
 }
