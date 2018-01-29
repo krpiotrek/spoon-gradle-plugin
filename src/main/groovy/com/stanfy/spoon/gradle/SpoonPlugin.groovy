@@ -148,15 +148,7 @@ class SpoonPlugin implements Plugin<Project> {
       }
 
       task.doFirst {
-        def testedOutput = testVariant.testedVariant.outputs[0]
-
-        if (testedOutput instanceof ApkVariantOutput) {
-          task.applicationApk = testedOutput.outputFile
-        } else {
-          // This is a hack for library projects.
-          // We supply the same apk as an application and instrumentation to the soon runner.
-          task.applicationApk = task.instrumentationApk
-        }
+        task.applicationApk = testVariant.testedVariant.outputs[0]
       }
 
       task.outputs.upToDateWhen { false }
