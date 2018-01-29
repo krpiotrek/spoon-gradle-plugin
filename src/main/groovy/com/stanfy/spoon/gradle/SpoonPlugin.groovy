@@ -99,15 +99,8 @@ class SpoonPlugin implements Plugin<Project> {
       task.configure {
         group = JavaBasePlugin.VERIFICATION_GROUP
 
-        def testedOutput = testVariant.testedVariant.outputs[0]
-        if (testedOutput instanceof ApkVariantOutput) {
-          applicationApk = testedOutput.outputFile
-        } else {
-          // This is a hack for library projects.
-          // We supply the same apk as an application and instrumentation to the soon runner.
-          applicationApk = testedOutput
-        }
-        instrumentationApk = testedOutput
+        applicationApk = testVariant.testedVariant.outputs[0].outputFile
+        instrumentationApk = applicationApk
 
         File outputBase = config.baseOutputDir
         if (!outputBase) {
