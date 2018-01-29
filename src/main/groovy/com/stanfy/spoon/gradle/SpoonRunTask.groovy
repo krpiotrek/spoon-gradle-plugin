@@ -125,8 +125,8 @@ class SpoonRunTask extends DefaultTask implements VerificationTask {
     LOG.debug("numShards: $numShards")
     LOG.debug("shardIndex: $shardIndex")
 
-//    String cp = getClasspath()
-//    LOG.debug("Classpath: $cp")
+    String cp = getClasspath()
+    LOG.debug("Classpath: $cp")
 
     SpoonRunner.Builder runBuilder = new SpoonRunner.Builder()
         .setTerminateAdb(false)
@@ -139,7 +139,7 @@ class SpoonRunTask extends DefaultTask implements VerificationTask {
         .setClassName(className)
         .setMethodName(methodName)
         .setAndroidSdk(project.android.sdkDirectory)
-//        .setClasspath(cp)
+        .setClasspath(cp)
         .setNoAnimations(noAnimations)
         .setCodeCoverage(codeCoverage)
         .setShard(shard)
