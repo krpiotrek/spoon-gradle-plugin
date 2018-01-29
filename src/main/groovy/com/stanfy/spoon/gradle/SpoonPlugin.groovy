@@ -99,21 +99,21 @@ class SpoonPlugin implements Plugin<Project> {
       task.configure {
         group = JavaBasePlugin.VERIFICATION_GROUP
 
-        def instrumentationPackage = testVariant.outputs[0].outputFile
-        if (projectOutput instanceof ApkVariantOutput) {
-          applicationApk = projectOutput.outputFile
+        def testedOutput = testVariant.testedVariant.outputs[0]
+        if (testedOutput instanceof ApkVariantOutput) {
+          applicationApk = testedOutput.outputFile
         } else {
           // This is a hack for library projects.
           // We supply the same apk as an application and instrumentation to the soon runner.
-          applicationApk = instrumentationPackage
+          applicationApk = testedOutput
         }
-        instrumentationApk = instrumentationPackage
+        instrumentationApk = testedOutput
 
         File outputBase = config.baseOutputDir
         if (!outputBase) {
           outputBase = new File(project.buildDir, "spoon")
         }
-        output = new File(outputBase, projectOutput.dirName)
+        output = new File(outputBase, testVariant.testedVariant.name)
 
         debug = config.debug
         ignoreFailures = config.ignoreFailures
