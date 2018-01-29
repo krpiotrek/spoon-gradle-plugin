@@ -99,7 +99,7 @@ class SpoonPlugin implements Plugin<Project> {
       task.configure {
         group = JavaBasePlugin.VERIFICATION_GROUP
 
-        applicationApk = testVariant.testedVariant.outputs[0].outputFile
+        applicationApk = testVariant.outputs[0].outputFile
         instrumentationApk = applicationApk
 
         File outputBase = config.baseOutputDir
