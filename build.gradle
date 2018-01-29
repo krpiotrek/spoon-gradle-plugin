@@ -39,7 +39,7 @@ dependencies {
   compile gradleApi()
   compile localGroovy()
 
-  compile 'com.squareup.spoon:spoon-runner:1.6.4'
+  compile 'com.squareup.spoon:spoon-runner:1.7.1'
 
   compile 'com.android.tools.build:gradle:3.0.1'
 
