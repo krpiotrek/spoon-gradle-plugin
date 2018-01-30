@@ -99,6 +99,7 @@ class SpoonPlugin implements Plugin<Project> {
       task.configure {
         group = JavaBasePlugin.VERIFICATION_GROUP
 
+        applicationApk = testVariant.testedVariant.outputs[0].outputFile
         def instrumentationPackage = testVariant.outputs[0].outputFile
         instrumentationApk = instrumentationPackage
 
@@ -148,7 +149,8 @@ class SpoonPlugin implements Plugin<Project> {
       }
 
       task.doFirst {
-        task.applicationApk = testVariant.testedVariant.outputs[0]
+
+        task.
       }
 
       task.outputs.upToDateWhen { false }
