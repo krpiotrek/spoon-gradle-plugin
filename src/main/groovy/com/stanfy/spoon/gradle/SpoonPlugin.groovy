@@ -99,10 +99,6 @@ class SpoonPlugin implements Plugin<Project> {
       task.configure {
         group = JavaBasePlugin.VERIFICATION_GROUP
 
-        applicationApk = testVariant.testedVariant.outputs[0].outputFile
-        def instrumentationPackage = testVariant.outputs[0].outputFile
-        instrumentationApk = instrumentationPackage
-
         File outputBase = config.baseOutputDir
         if (!outputBase) {
           outputBase = new File(project.buildDir, "spoon")
@@ -146,6 +142,11 @@ class SpoonPlugin implements Plugin<Project> {
         }
 
         dependsOn testVariant.testedVariant.assemble, testVariant.assemble
+      }
+
+      task.doFirst {
+        task.applicationApk = testVariant.testedVariant.outputs[0].outputFile
+        task.instrumentationApk = testVariant.outputs[0].outputFile
       }
 
       task.outputs.upToDateWhen { false }
