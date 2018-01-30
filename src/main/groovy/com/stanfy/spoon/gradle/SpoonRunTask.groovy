@@ -67,7 +67,6 @@ class SpoonRunTask extends DefaultTask implements VerificationTask {
   File instrumentationApk
 
   /** Application APK. */
-  @InputFile
   File applicationApk
 
   /** Output directory. */
