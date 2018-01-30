@@ -148,11 +148,6 @@ class SpoonPlugin implements Plugin<Project> {
         dependsOn testVariant.testedVariant.assemble, testVariant.assemble
       }
 
-      task.doFirst {
-
-        task.
-      }
-
       task.outputs.upToDateWhen { false }
       return task
     } as List<SpoonRunTask>
