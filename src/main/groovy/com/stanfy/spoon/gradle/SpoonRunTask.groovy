@@ -125,8 +125,8 @@ class SpoonRunTask extends DefaultTask implements VerificationTask {
 
     SpoonRunner.Builder runBuilder = new SpoonRunner.Builder()
         .setTerminateAdb(false)
-        .setTitle(title)
         .addOtherApk(applicationApk)
+        .setSingleInstrumentationCall(true)
         .setTestApk(instrumentationApk)
         .setOutputDirectory(output)
         .setAllowNoDevices(!failIfNoDeviceConnected)
