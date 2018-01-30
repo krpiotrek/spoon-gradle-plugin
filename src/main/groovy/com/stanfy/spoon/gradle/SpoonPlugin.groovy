@@ -105,6 +105,9 @@ class SpoonPlugin implements Plugin<Project> {
         }
         output = new File(outputBase, testVariant.testedVariant.name)
 
+        applicationApk = testVariant.testedVariant.outputs[0].outputFile
+        instrumentationApk = testVariant.outputs[0].outputFile
+
         debug = config.debug
         ignoreFailures = config.ignoreFailures
         devices = config.devices
@@ -146,8 +149,7 @@ class SpoonPlugin implements Plugin<Project> {
 
       task.doFirst {
         println "\n\n\n\n\n" + testVariant.testedVariant.outputs[0].outputFile " \n\n\n\n\n"
-        task.applicationApk = testVariant.testedVariant.outputs[0].outputFile
-        task.instrumentationApk = testVariant.outputs[0].outputFile
+
       }
 
       task.outputs.upToDateWhen { false }
